@@ -1,9 +1,11 @@
 version: '3.8'
 services:
   rw-proxy:
-    build: ./nginx
+    build: ghcr.io/reproduce-work/rw-nginx:latest
     ports:
       - "8080:80"
+    volumes:
+      - ./:/usr/share/nginx/_rwproj/
     depends_on:
       - rw-target
     networks:
@@ -17,7 +19,6 @@ services:
       - rw_network
     environment:
       - JUPYTER_ENABLE_LAB=yes
-    platform: linux/arm64
 
 networks:
   rw_network:
